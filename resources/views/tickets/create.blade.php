@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<h1>Create Ticket</h1>
+
     <div class="container">
-        <h1>Create Ticket</h1>
 
         <!-- Display validation errors -->
         @if ($errors->any())
@@ -38,4 +39,6 @@
             </div>
 
             <button type="submit" class="btn btn-success">Create</button>
-        </
+        </form>
+    </div>
+@endsection
