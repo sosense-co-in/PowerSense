@@ -61,6 +61,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="manager_id">Manager <span class="text-danger">*</span></label>
+                                <select class="form-control" name="manager_id" id="manager_id">
+                                    <option value="" selected disabled>Select Manager</option>
+                                    @foreach($managers as $manager)
+                                        <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="role">Role <span class="text-danger">*</span></label>
                                 <select class="form-control" name="role" id="role" required>
                                     <option value="" selected disabled>Select Role</option>
@@ -85,7 +95,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="image">Profile Image <span class="text-danger">*</span></label>
+                                <label for="image">Profile Image <span class="text-danger">*</  span></label>
                                 <input id="image" type="file" name="image" data-max-file-size="500KB">
                             </div>
                         </div>

@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-3">
                 <div class="card border-0">
                     <div class="card-body p-0 d-flex align-items-center shadow-sm">
@@ -76,6 +77,51 @@
                         <div>
                             <div class="text-value text-danger">{{ $tickets }}</div>
                             <div class="text-muted text-uppercase font-weight-bold small">Tickets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Accounts Tile -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0">
+                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                        <div class="bg-gradient-dark p-4 mfe-3 rounded-left">
+                            <i class="bi bi-person-fill font-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-value text-secondary">{{ $accounts }}</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">Accounts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Contacts Tile -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0">
+                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                        <div class="bg-gradient-info p-4 mfe-3 rounded-left">
+                            <i class="bi bi-person-check font-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-value text-dark">{{ $contacts }}</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">Contacts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New AMC Contracts Tile -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0">
+                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                        <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                            <i class="bi bi-file-earmark-text font-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-value text-success">{{ $amcContracts }}</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">AMC Contracts</div>
                         </div>
                     </div>
                 </div>
@@ -129,6 +175,49 @@
             </div>
         </div>
         @endcan
+
+        <!-- New Chart for Accounts, Contacts, and AMC Contracts -->
+        <div class="row mb-4">
+            @can('show_accounts_overview')
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header">
+                        Accounts Overview
+                    </div>
+                    <div class="card-body">
+                        <canvas id="accountsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            @endcan
+
+            @can('show_contacts_overview')
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header">
+                        Contacts Overview
+                    </div>
+                    <div class="card-body">
+                        <canvas id="contactsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            @endcan
+
+            @can('show_amc_overview')
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header">
+                        AMC Contracts Overview
+                    </div>
+                    <div class="card-body">
+                        <canvas id="amcChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            @endcan
+        </div>
+
     </div>
 @endsection
 

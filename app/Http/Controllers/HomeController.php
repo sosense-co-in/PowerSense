@@ -14,6 +14,9 @@ use Modules\Sale\Entities\SalePayment;
 use Modules\SalesReturn\Entities\SaleReturn;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
 use App\Models\Ticket;
+use App\Models\Account; // Import Account model
+use App\Models\Contact; // Import Contact model
+use App\Models\AmcContract; // Import AMC Contract model
 
 class HomeController extends Controller
 {
@@ -36,12 +39,20 @@ class HomeController extends Controller
         $profit = $revenue - $product_costs;
         $tickets = Ticket::count();
 
+        // Get counts for accounts, contacts, and AMC contracts
+        $accounts = Account::count();
+        $contacts = Contact::count();
+        $amcContracts = AmcContract::count();
+
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $sale_returns / 100,
             'purchase_returns' => $purchase_returns / 100,
             'profit' => $profit,
-            'tickets' => $tickets, // Explicitly passing the tickets count
+            'tickets' => $tickets,
+            'accounts' => $accounts, // Passing accounts count
+            'contacts' => $contacts, // Passing contacts count
+            'amcContracts' => $amcContracts, // Passing AMC contracts count
         ]);
     }
 
