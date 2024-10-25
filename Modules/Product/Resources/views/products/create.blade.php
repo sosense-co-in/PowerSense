@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="barcode_symbology">Barcode Symbology <span
                                                 class="text-danger">*</span></label>
@@ -74,7 +74,7 @@
                                             <option value="EAN8">EAN-8</option>
                                         </select>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
 
                             <div class="form-row">
