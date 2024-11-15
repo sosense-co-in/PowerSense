@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-white">
         <h1>Tickets</h1>
         <a href="{{ route('tickets.create') }}" class="btn btn-primary mb-3">Create Ticket</a>
 

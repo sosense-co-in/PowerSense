@@ -9,14 +9,7 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'account_id',
-        'created_by',
-        'updated_by',
-    ];
+    protected $fillable = ['name', 'email', 'phone', 'account_id', 'created_by', 'updated_by'];
 
     /**
      * Get the account that owns the contact.
@@ -32,6 +25,11 @@ class Contact extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class); // Assumes Call model has contact_id foreign key
     }
 
     /**

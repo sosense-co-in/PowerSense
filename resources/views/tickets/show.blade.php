@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-white">
         <h1>{{ $ticket->subject }}</h1>
         <p><strong>Description:</strong></p>
         <p>{{ $ticket->description }}</p>

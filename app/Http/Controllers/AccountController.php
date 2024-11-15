@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AccountStoreRequest;
@@ -83,10 +84,12 @@ class AccountController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $account = Account::with(['contacts.calls', 'owner', 'modefied_by'])->where('id', $id)->firstOrFail();
+        $account = Account::with(['contacts.calls', 'owner', 'modifiedBy'])
+            ->where('id', $id)
+            ->firstOrFail();
 
         // Check permissions
-        if ($user->id != $account->owner['id'] && !$this->isManager($user)) {
+        if (isset($account->owner) && $user->id != $account->owner['id'] && !$this->isManager($user)) {
             return abort(403, 'Permission denied | You are not the owner.');
         }
 
@@ -105,7 +108,7 @@ class AccountController extends Controller
         $account = Account::with('owner')->where('id', $id)->firstOrFail();
 
         // Check permissions
-        if ($user->id != $account->owner['id'] && !$this->isManager($user)) {
+        if (isset($account->owner) && $user->id != $account->owner['id'] && !$this->isManager($user)) {
             return abort(403, 'Permission denied | You are not the owner.');
         }
 
@@ -188,6 +191,11 @@ class AccountController extends Controller
      */
     public function isManager($user)
     {
-        return $user->hasAnyRole(['Admin']);
+        // Check if the user is null before calling hasAnyRole
+        if ($user && $user->hasAnyRole(['Admin'])) {
+            return true;
+        }
+
+        return false;
     }
 }
