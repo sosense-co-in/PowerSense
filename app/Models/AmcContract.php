@@ -21,4 +21,9 @@ class AmcContract extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function modified_by()
+    {
+        return $this->belongsTo(User::class, 'modified_by_id'); // Replace 'modified_by_id' with your actual column name
+    }
 }

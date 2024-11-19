@@ -15,12 +15,7 @@
         <form action="{{ route('customers.store') }}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-lg-12">
-                    @include('utils.alerts')
-                    <div class="form-group">
-                        <button class="btn btn-primary">Create Customer <i class="bi bi-check"></i></button>
-                    </div>
-                </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -37,6 +32,17 @@
                                         <input type="email" class="form-control" name="customer_email" required>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                    <input type="password" name="password_confirmation" class="form-control" required>
+                                </div>
+
                             </div>
 
                             <div class="form-row">
@@ -66,6 +72,21 @@
                                         <label for="address">Address <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="address" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="is_active">Status <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="is_active" id="is_active" required>
+                                            <option value="" selected disabled>Select Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="2">Deactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    @include('utils.alerts')
+                                    <div class="form-group">
+                                        <button class="btn btn-primary">Create Customer <i class="bi bi-check"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -75,4 +96,3 @@
         </form>
     </div>
 @endsection
-

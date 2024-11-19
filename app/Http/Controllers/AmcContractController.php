@@ -21,6 +21,11 @@ class AmcContractController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please log in to access the contracts.');
+        }
+
         $isManager = $this->isManager($user);
 
         if ($isManager) {
@@ -63,7 +68,7 @@ class AmcContractController extends Controller
         }
 
         $date = Carbon::now();
-        $refNo = 'PVIPL/' . $term . '/' . strtoupper($date->format('M')) . '/' . $date->format('Y') . '-' . ($date->format('y') + 1) . '/' . $newRefNo;
+        $refNo = 'PV/' . $term . '/' . strtoupper($date->format('M')) . '/' . $date->format('Y') . '-' . ($date->format('y') + 1) . '/' . $newRefNo;
 
         // Fetch all accounts
         $accounts = Account::all(); // Fetch all accounts
@@ -293,8 +298,13 @@ class AmcContractController extends Controller
      * @param  \App\Models\User  $user
      * @return bool
      */
-    private function isManager($user)
+    public function isManager($user)
     {
-        return $user->roles->contains('role', 'Manager');
+        // Check if the user is null before calling hasAnyRole
+        if ($user && $user->hasAnyRole(['Admin'])) {
+            return true;
+        }
+
+        return false;
     }
 }
