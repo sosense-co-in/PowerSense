@@ -667,6 +667,15 @@
                                                 <div class="col-6">
                                                     <div class="custom-control custom-switch">
                                                         <input type="checkbox" class="custom-control-input"
+                                                            id="update_ticket_statusreply_tickets" name="permissions[]" value="update_ticket_statusreply tickets"
+                                                            {{ old('update_ticket_statusreply tickets') ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="reply_tickets">update_ticket_status
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
                                                             id="manage_tickets" name="permissions[]"
                                                             value="manage tickets"
                                                             {{ old('manage tickets') ? 'checked' : '' }}>

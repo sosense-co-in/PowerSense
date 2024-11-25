@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
 use App\Models\User; // Import User model
+use App\Models\Account;
 use Spatie\Permission\Models\Role; // Import Role model
 use Illuminate\Support\Facades\Hash;
 
@@ -25,7 +26,8 @@ class CustomersController extends Controller
     {
         abort_if(Gate::denies('create_customers'), 403);
 
-        return view('people::customers.create');
+        $accounts = Account::all(); // Fetch all accounts
+        return view('people::customers.create', compact('accounts'));
     }
 
     public function store(Request $request)
@@ -33,33 +35,31 @@ class CustomersController extends Controller
         abort_if(Gate::denies('create_customers'), 403);
 
         $request->validate([
-            'customer_name'  => 'required|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'customer_phone' => 'required|max:255',
             'customer_email' => 'required|email|max:255|unique:users,email', // Ensure email is unique
-            'password'       => 'required|min:8|confirmed', // For User creation
-            'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
-            'address'        => 'required|string|max:500',
+            'password' => 'required|min:8|confirmed', // For User creation
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
         ]);
 
         // Create the customer record
         $customer = Customer::create([
-            'customer_name'  => $request->customer_name,
+            'customer_name' => $request->customer_name,
             'customer_phone' => $request->customer_phone,
             'customer_email' => $request->customer_email,
-            'city'           => $request->city,
-            'country'        => $request->country,
-            'address'        => $request->address,
-
+            'city' => $request->city,
+            'country' => $request->country,
+            'address' => $request->address,
         ]);
 
         // Create a corresponding user
         $user = User::create([
-            'name'     => $request->customer_name,
-            'email'    => $request->customer_email,
+            'name' => $request->customer_name,
+            'email' => $request->customer_email,
             'password' => Hash::make($request->password),
             'is_active' => $request->is_active,
-
         ]);
 
         // Assign the "Customer" role
@@ -94,22 +94,22 @@ class CustomersController extends Controller
         abort_if(Gate::denies('update_customers'), 403);
 
         $request->validate([
-            'customer_name'  => 'required|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'customer_phone' => 'required|max:255',
             'customer_email' => 'required|email|max:255',
-            'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
-            'address'        => 'required|string|max:500',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
             'is_active' => 'required|in:1,2',
         ]);
 
         $customer->update([
-            'customer_name'  => $request->customer_name,
+            'customer_name' => $request->customer_name,
             'customer_phone' => $request->customer_phone,
             'customer_email' => $request->customer_email,
-            'city'           => $request->city,
-            'country'        => $request->country,
-            'address'        => $request->address,
+            'city' => $request->city,
+            'country' => $request->country,
+            'address' => $request->address,
             'is_active' => $request->is_active,
         ]);
 

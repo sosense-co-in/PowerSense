@@ -32,6 +32,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tickets', TicketController::class);
     Route::post('tickets/{id}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
 
+    Route::resource('tickets', TicketController::class);
+    Route::get('tickets/assigned', [TicketController::class, 'assigned'])->name('tickets.assigned');
+
+    Route::get('tickets/{ticket}/edit-status', [TicketController::class, 'editStatus'])->name('tickets.edit-status');
+    Route::patch('tickets/{ticket}/update-status', [TicketController::class, 'updateStatus'])->name('tickets.update-status');
+
     Route::resource('contact', ContactController::class);
 
     Route::get('/amc-contracts', [AmcContractController::class, 'index'])->name('amc-contracts.index');

@@ -36,7 +36,7 @@
                                     <tr>
                                         <td>{{ $ticket->id }}</td>
                                         <td>{{ $ticket->subject }}</td>
-                                        <td>{{ Str::limit($ticket->content, 50) }}</td>
+                                        <td>{{ Str::limit($ticket->description, 50) }}</td>
                                         <td>{{ $ticket->agent->name ?? 'Unassigned' }}</td>
                                         <td>
                                             <form action="{{ route('tickets.update-status', $ticket->id) }}" method="POST">

@@ -22,8 +22,13 @@
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="customer_name">Customer Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="customer_name" required>
+                                        <label for="account_id">Account Name <span class="text-danger">*</span></label>
+                                        <select name="account_id" id="account_id" class="form-control" required>
+                                            <option value="" selected disabled>Select Account</option>
+                                            @foreach($accounts as $account)
+                                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -42,7 +47,6 @@
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
                                     <input type="password" name="password_confirmation" class="form-control" required>
                                 </div>
-
                             </div>
 
                             <div class="form-row">
